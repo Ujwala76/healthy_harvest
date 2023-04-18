@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "543630533260",
+    "project_id": "healthy-harvest-3526a",
+    "storage_bucket": "healthy-harvest-3526a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:543630533260:android:927aebdeef295491ead1a9",
+        "android_client_info": {
+          "package_name": "com.example.healthy_harvest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "543630533260-lu3nl5i6rvbnlufksgp29p361nnn9ske.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5RFV6UmM8M1c1eOt5y1T9u6jTFoyUN4I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "543630533260-lu3nl5i6rvbnlufksgp29p361nnn9ske.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
