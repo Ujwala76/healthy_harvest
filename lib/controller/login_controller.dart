@@ -87,7 +87,7 @@ class LoginController extends GetxController {
           Get.defaultDialog(
               title: "Error!",
               titleStyle: TextStyle(color: Color.fromARGB(255, 213, 0, 0)),
-              content: const Text("Please check your Username and Password"),
+              content: const Text("Please check your Email and Password"),
               textCancel: "Close");
         }
       });

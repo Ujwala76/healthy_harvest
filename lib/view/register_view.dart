@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
@@ -39,11 +40,15 @@ class RegisterView extends StatelessWidget {
                       top: MediaQuery.of(context).size.height * 0.05),
                   child: TextFormField(
                       validator: controller.validateName,
-                      //onSaved: ,
+                      onSaved: controller.saveName,
+                      keyboardType: TextInputType.text,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(RegExp("[a-zA-Z]")),
+                      ],
                       decoration: InputDecoration(
                         labelText: "Name",
-                        floatingLabelStyle:
-                            const TextStyle(color: Color.fromARGB(255, 28, 189, 13)),
+                        floatingLabelStyle: const TextStyle(
+                            color: Color.fromARGB(255, 28, 189, 13)),
                         focusColor: const Color.fromARGB(255, 28, 189, 13),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10.0),
@@ -61,12 +66,12 @@ class RegisterView extends StatelessWidget {
                   child: TextFormField(
                       controller: emailController,
                       validator: controller.validatRegisterEmail,
-                      //onSaved: ,
+                      onSaved: controller.saveEmail,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         labelText: "Email",
-                        floatingLabelStyle:
-                            const TextStyle(color: Color.fromARGB(255, 28, 189, 13)),
+                        floatingLabelStyle: const TextStyle(
+                            color: Color.fromARGB(255, 28, 189, 13)),
                         focusColor: const Color.fromARGB(255, 28, 189, 13),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10.0),
@@ -78,27 +83,39 @@ class RegisterView extends StatelessWidget {
                             borderRadius: BorderRadius.circular(5)),
                       )),
                 ),
-                Container(
-                  padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.height * 0.02),
-                  child: TextFormField(
-                      controller: passController,
-                      validator: controller.validateRegisterPassword,
-                      //onSaved: ,
-                      decoration: InputDecoration(
-                        labelText: "Password",
-                        floatingLabelStyle:
-                            const TextStyle(color: Color.fromARGB(255, 28, 189, 13)),
-                        focusColor: const Color.fromARGB(255, 28, 189, 13),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                          borderSide: const BorderSide(
-                            color: Color.fromARGB(255, 28, 189, 13),
-                          ),
-                        ),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5)),
-                      )),
+                Obx(
+                  () => Container(
+                    padding: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.height * 0.02),
+                    child: TextFormField(
+                        controller: passController,
+                        validator: controller.validateRegisterPassword,
+                        onSaved: controller.savePassword,
+                        keyboardType: TextInputType.visiblePassword,
+                        decoration: InputDecoration(
+                            suffixIcon: GestureDetector(
+                              onTap: controller.changeObsecureText,
+                              child: Icon(
+                                controller.obsecureText.value == true
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: const Color.fromARGB(255, 28, 189, 13),
+                              ),
+                            ),
+                            labelText: "Password",
+                            floatingLabelStyle: const TextStyle(
+                                color: Color.fromARGB(255, 28, 189, 13)),
+                            focusColor: const Color.fromARGB(255, 28, 189, 13),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                              borderSide: const BorderSide(
+                                color: Color.fromARGB(255, 28, 189, 13),
+                              ),
+                            ),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5))),
+                        obscureText: controller.obsecureText.value),
+                  ),
                 ),
                 Container(
                   padding: EdgeInsets.only(
@@ -116,7 +133,9 @@ class RegisterView extends StatelessWidget {
                     padding: const EdgeInsets.only(
                         right: 100.0, left: 100.0, top: 10.0, bottom: 10.0),
                   ),
-                  onPressed: () {
+                  onPressed: controller.validateInputs
+
+                  /* () {
                     FirebaseAuth.instance
                         .createUserWithEmailAndPassword(
                             email: emailController.text,
@@ -130,7 +149,9 @@ class RegisterView extends StatelessWidget {
                     }).onError((error, stackTrace) {
                       print("Error ${error.toString()}");
                     });
-                  },
+                    
+                  }*/
+                  ,
                   child: const Text(
                     "Register",
                     style: TextStyle(
